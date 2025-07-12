@@ -3,12 +3,6 @@ package com.luv2code.springcoredemo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/*
-// This will scan the util package for @Component components as well
-@SpringBootApplication(
-		scanBasePackages = {"com.luv2code.springcoredemo",
-							 "com.luv2code.util"}
-)*/
 @SpringBootApplication
 public class SpringcoredemoApplication {
 
