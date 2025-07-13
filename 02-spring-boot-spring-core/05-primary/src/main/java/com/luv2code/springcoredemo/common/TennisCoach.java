@@ -9,6 +9,8 @@ public class TennisCoach implements Coach {
 
     @Override
     public String getDailyWorkout() {
+        // IntelliJ shortcut - 'sout', 'soutv', 'soutm', or 'serr' then press tab for System.out.println(...);
+        System.out.println();
         return "Practice your backhand volley. 🎾🏸";
     }
 
