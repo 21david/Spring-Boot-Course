@@ -14,6 +14,7 @@ public class DemoController {
 
     @Autowired  // for automatic dependency injection
     public void DemoController(@Qualifier("cricketCoach") Coach theCoach) {
+        // See video 53 in https://www.udemy.com/course/spring-hibernate-tutorial/learn/lecture/36834224#overview for code
         System.out.println("In constructor: DemoController.DemoController");
         myCoach = theCoach;
     }
