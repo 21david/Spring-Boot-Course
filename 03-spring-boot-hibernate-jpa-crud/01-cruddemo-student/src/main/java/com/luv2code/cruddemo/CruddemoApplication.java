@@ -25,6 +25,7 @@ public class CruddemoApplication {
 		System.out.println("CruddemoApplication.commandLineRunner");
 		return runner -> {
 			System.out.println("Hello World!");
+
 //			createStudent(studentDAO);
 
 //			createMultipleStudents(studentDAO);
@@ -35,11 +36,25 @@ public class CruddemoApplication {
 
 //			queryByLastName(studentDAO);
 
-			updateStudent(studentDAO);
+//			updateStudent(studentDAO);
 
+//			deleteStudent(studentDAO);
+
+			deleteAllStudents(studentDAO);
 		};
+
 	}
 
+	private void deleteAllStudents(StudentDAO studentDAO) {
+		System.out.println("Deleting all students...");
+		System.out.println("Deleted " + studentDAO.deleteAll() + " students.");
+	}
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		studentDAO.delete(1);
+	}
+
+	// UPDATE:
 	private void updateStudent(StudentDAO studentDAO) {
 
 		// Retrieve student based on the id: primary key
@@ -59,6 +74,7 @@ public class CruddemoApplication {
 		System.out.println(newStudent);
 	}
 
+	// READ:
 	private void queryByLastName(StudentDAO studentDAO) {
 		System.out.println("CruddemoApplication.queryByLastName");
 
@@ -107,6 +123,7 @@ public class CruddemoApplication {
 
 	}
 
+	// CREATE:
 	private void createMultipleStudents(StudentDAO studentDAO) {
 		System.out.println("Creating and persisting 3 new students...");
 
