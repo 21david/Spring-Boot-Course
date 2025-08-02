@@ -17,7 +17,14 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		
+
+		<!--Add Spring Doc dependency for Swagger documentation of REST API-->
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+			<version>2.8.9</version>
+		</dependency>
+
 		<!-- Add dependency for Spring Data REST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
