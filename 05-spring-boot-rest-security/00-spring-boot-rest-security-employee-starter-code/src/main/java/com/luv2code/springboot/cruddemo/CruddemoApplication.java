@@ -8,6 +8,7 @@ public class CruddemoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CruddemoApplication.class, args);
+		System.out.println("http://localhost:8080/api/employees");
 	}
 
 }
