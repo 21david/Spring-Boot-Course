@@ -6,36 +6,25 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+//import org.springframework.security.core.userdetails.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class DemoSecurityConfig {
 
-    // Create users
+    // Add support for JDBC to store users in the database
     @Bean
-    public InMemoryUserDetailsManager userDetailsManager() {
-        UserDetails john = User.builder()
-                .username("eric")
-                .password("{noop}test123")
-                .roles("EMPLOYEE")
-                .build();
+    public UserDetailsManager userDetailsManager(DataSource dataSource) {
 
-        UserDetails mary = User.builder()
-                .username("mary")
-                .password("{noop}test123")
-                .roles("EMPLOYEE", "MANAGER")
-                .build();
-
-        UserDetails david = User.builder()
-                .username("david")
-                .password("{noop}test123")
-                .roles("EMPLOYEE", "MANAGER", "ADMIN")
-                .build();
-
-        return new InMemoryUserDetailsManager(david, mary, john);
+        // tells Spring Security to use JDBC authentication with our data source
+        // It will then look into the database for the 'users' and 'authorities' tables its expecting
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     // Restrict access based on roles
@@ -83,4 +72,29 @@ public class DemoSecurityConfig {
 
         return http.build();
     }
+
+    /*
+    // Create users by hardcoding them
+    @Bean
+    public InMemoryUserDetailsManager userDetailsManager() {
+        UserDetails john = User.builder()
+                .username("eric")
+                .password("{noop}test123")
+                .roles("EMPLOYEE")
+                .build();
+
+        UserDetails mary = User.builder()
+                .username("mary")
+                .password("{noop}test123")
+                .roles("EMPLOYEE", "MANAGER")
+                .build();
+
+        UserDetails david = User.builder()
+                .username("david")
+                .password("{noop}test123")
+                .roles("EMPLOYEE", "MANAGER", "ADMIN")
+                .build();
+
+        return new InMemoryUserDetailsManager(david, mary, john);
+    }*/
 }
