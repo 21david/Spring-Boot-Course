@@ -22,9 +22,28 @@ public class DemoSecurityConfig {
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
 
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+
+        // This gives Spring Security the query to get user information from a username
+        // it plugs in the username in the ? and gets back all that user's info
+        // "Set the query for getting user information given a username"
+        jdbcUserDetailsManager.setUsersByUsernameQuery("""
+            SELECT user_id, pw, active
+            FROM members
+            WHERE user_id=?;
+        """);
+
+        // This the same thing but for the roles/authorities that a user has
+        // "Set the query for getting authorities given a username"
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("""
+            SELECT user_id, role
+            FROM roles
+            WHERE user_id=?;
+        """);
+
         // tells Spring Security to use JDBC authentication with our data source
         // It will then look into the database for the 'users' and 'authorities' tables its expecting
-        return new JdbcUserDetailsManager(dataSource);
+        return jdbcUserDetailsManager;
     }
 
     // Restrict access based on roles
