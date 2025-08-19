@@ -3,14 +3,18 @@
 
 <head>
     <title >Hello World - Input Form</title>
-
+    <style>
+        * {
+            font-size: 32px;
+        }
+    </style>
 </head>
 <body>
 
     <!--Send a GET request to the processform on submit-->
-    <form th:action="@{/processFormV2}" method="GET">
+    <form th:action="@{/processFormV3}" method="POST">
         <label for="studentName">Name: </label>
-        <input id="studentName" type="text" name="studentName" placeholder="What's your name?" />
+        <input id="studentName" type="text" name="studentName" placeholder="What's your name?" autofocus />
         <input type="submit" />
     </form>
 </body>

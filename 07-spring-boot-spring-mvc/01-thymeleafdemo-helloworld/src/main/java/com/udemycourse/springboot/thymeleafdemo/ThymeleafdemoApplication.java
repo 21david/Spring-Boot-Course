@@ -10,6 +10,7 @@ public class ThymeleafdemoApplication {
 		SpringApplication.run(ThymeleafdemoApplication.class, args);
 		System.out.println("http://localhost:8080/hello");
 		System.out.println("http://localhost:8080/showForm");
+		System.out.println("http://localhost:8080/showStudentForm");
 	}
 
 }
