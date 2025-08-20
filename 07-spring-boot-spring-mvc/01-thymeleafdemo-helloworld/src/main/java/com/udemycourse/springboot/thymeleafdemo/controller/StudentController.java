@@ -13,11 +13,15 @@ import java.util.List;
 
 @Controller
 public class StudentController {
-    
+
+    @Value("${countries}")
+    private List<String> countries;
+
     @GetMapping("/showStudentForm")
     public String showForm(Model model) {
 
         model.addAttribute("student", new Student());
+        model.addAttribute("countries", countries);
 
         return "student-form";
     }

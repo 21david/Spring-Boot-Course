@@ -15,11 +15,8 @@
          <br><br>
          Country:
         <select th:field="*{country}">
-            <option value="USA">United States</option>
-            <option value="BRAZIL">Brazil</option>
-            <option value="FRANCE">France</option>
-            <option value="GERMANY">Germany</option>
-            <option value="INDIA">India</option>
+            <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}"></option>
+            <!--each one turns into something like <option value="USA">United States</option>-->
         </select>
          <br><br>
          <input type="submit" value="Submit" />
