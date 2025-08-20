@@ -24,13 +24,30 @@
     <br>
 
     <label for="lastName">*Last name: </label>
-    <input id="lastName" type="text" th:field="*{lastName}" placeholder="Type here" required></input>
+    <input id="lastName" type="text" th:field="*{lastName}" placeholder="Type here"></input>
 
     <!--Error handling-->
     <span th:if="${#fields.hasErrors('lastName')}"
             th:errors="*{lastName}"
             class="error"></span>
     <br>
+
+    <label for="freePasses">Free passes: </label>
+    <input id="freePasses" type="text" th:field="*{freePasses}"></input>
+    <span th:if="${#fields.hasErrors('freePasses')}"
+          th:errors="*{freePasses}"
+          class="error"></span>
+
+    <br>
+
+    <label for="postalCode">Free passes: </label>
+    <input id="postalCode" type="text" th:field="*{postalCode}"></input>
+    <span th:if="${#fields.hasErrors('postalCode')}"
+          th:errors="*{postalCode}"
+          class="error"></span>
+
+    <br>
+
     <input type="submit" value="Submit">
 
 </form>
