@@ -40,7 +40,7 @@
 
     <br>
 
-    <label for="postalCode">Free passes: </label>
+    <label for="postalCode">Postal code: </label>
     <input id="postalCode" type="text" th:field="*{postalCode}"></input>
     <span th:if="${#fields.hasErrors('postalCode')}"
           th:errors="*{postalCode}"

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PersonController {
 
+    // @InitBinder makes this function run before any mapping function is called.
+    // Here, we set the editor to the binder to trim whitespace for any input data
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
         System.out.println("initBinder() running");
@@ -38,7 +40,7 @@ public class PersonController {
             BindingResult br) {
 
         System.out.println("Last name: |" + thePerson.getLastName() + "|");  // if person inputted spaces, this should show null because of the editor
-
+        System.out.println("Binding result: " + br);
         if (br.hasErrors())
             return "name-form";  // Send them back
         else
