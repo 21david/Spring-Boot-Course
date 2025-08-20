@@ -17,11 +17,20 @@ public class StudentController {
     @Value("${countries}")
     private List<String> countries;
 
+    @Value("${languages}")
+    private List<String> languages;
+
+    @Value("${sandwich_ingredients}")
+    private List<String> ingredients;
+
     @GetMapping("/showStudentForm")
     public String showForm(Model model) {
 
         model.addAttribute("student", new Student());
         model.addAttribute("countries", countries);
+        model.addAttribute("languages", languages);
+        ingredients.set(ingredients.size() - 1, "Jalapeños"); // fix broken ñ
+        model.addAttribute("ingredients", ingredients);
 
         return "student-form";
     }
@@ -29,7 +38,7 @@ public class StudentController {
     @PostMapping("/processStudentForm")
     public String processStudent(@ModelAttribute("student") Student student) {
 
-        System.out.println("The student's fields have been set to: " + student.getFirstName() + " " + student.getLastName() + " through the form.");
+        System.out.println("Current student data: " + student);
 
         return "student-confirmation";
     }

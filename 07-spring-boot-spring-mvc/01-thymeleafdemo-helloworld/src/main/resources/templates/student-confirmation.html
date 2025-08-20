@@ -11,6 +11,15 @@
 
     <br><br>
     Country: <span th:text="${student.country}"></span>
-    
+
+    <br><br>
+    Favorite Programming Language: <span th:text="${student.language}"></span>
+
+    <br><br>
+    Sandwich stack:
+    <ol>
+        <li th:each="ingr : ${student.favoriteIngredients}" th:text="${ingr}"></li>
+    </ol>
+
 </body>
 </html>

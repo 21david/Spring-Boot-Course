@@ -8,18 +8,40 @@
 
     <h3>Student Registration Form</h3>
     <form th:action="@{/processStudentForm}" th:object="${student}" method="POST">
-        <!-- *{firstName} is a shortcut for ${student.firstName}, since th:object is set to ${student} -->
+        <!-- *{firstName} is a shortcut for ${student.firstName}, since th:object is set to ${student} (student object created in the controller) -->
          First name: <input type="text" th:field="*{firstName}" />
+
          <br><br>
+
          Last name: <input type="text" th:field="*{lastName}" />
+
          <br><br>
+
          Country:
         <select th:field="*{country}">
             <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}"></option>
             <!--each one turns into something like <option value="USA">United States</option>-->
         </select>
+
          <br><br>
-         <input type="submit" value="Submit" />
+
+        Favorite Programming Language:
+
+        <input type="radio" th:field="*{language}" th:each="lang : ${languages}" th:value="${lang}" th:text="${lang}" />
+        <!-- each one turns into <input type="radio">Go <input type="radio">Java-->
+
+        <br><br>
+
+        Sandwich ingredients:
+        <input type="checkbox"
+               th:field="*{favoriteIngredients}"
+               th:each="ingr : ${ingredients}"
+               th:value="${ingr}"
+               th:text="${ingr} " />
+
+        <br><br>
+
+        <input type="submit" value="Submit" />
     </form>
     
 </body>
