@@ -15,6 +15,9 @@
 
         <form th:action="@{/employees/processForm}" th:object="${employee}" method="POST">
 
+            <!-- We need this so that updating doesn't create a new employee instead -->
+            <input type="hidden" th:field="*{id}">
+
             <input type="text" placeholder="First name" th:field="*{firstName}"
                 class="form-control mb-4 w-25">
             <input type="text" placeholder="Last name" th:field="*{lastName}"
