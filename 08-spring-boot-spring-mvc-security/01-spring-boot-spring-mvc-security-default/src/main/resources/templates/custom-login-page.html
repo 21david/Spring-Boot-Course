@@ -8,7 +8,7 @@
 
   <h3>My Custom Login Page</h3>
   <form th:action="@{/authenticateUser}" method="POST">
-    
+
     <div th:if="${param.error}">
       <i>Sorry! Invalid username/password.</i>
     </div>
