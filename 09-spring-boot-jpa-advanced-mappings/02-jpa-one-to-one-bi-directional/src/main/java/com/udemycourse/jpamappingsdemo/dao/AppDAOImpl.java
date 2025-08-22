@@ -1,6 +1,7 @@
 package com.udemycourse.jpamappingsdemo.dao;
 
 import com.udemycourse.jpamappingsdemo.entity.Instructor;
+import com.udemycourse.jpamappingsdemo.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class AppDAOImpl implements AppDAO {
 
         // Because of CascadeType.ALL in Instructor, this also deletes any associated InstructorDetail in the database
         entityManager.remove(toDelete);
+    }
+
+    @Override
+    public InstructorDetail findInstructorDetailById(int id) {
+
+        // Because of CascadeType.ALL in InstructorDetail, this also gets any associated Instructor in the database
+        return entityManager.find(InstructorDetail.class, id);
     }
 
 }

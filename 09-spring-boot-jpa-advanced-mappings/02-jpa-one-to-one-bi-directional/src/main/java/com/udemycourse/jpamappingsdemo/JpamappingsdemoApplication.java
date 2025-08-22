@@ -24,8 +24,19 @@ public class JpamappingsdemoApplication {
 
 //			findInstructor(appDAO);
 
-			deleteInstructor(appDAO);
+//			deleteInstructor(appDAO);
+
+			findInstructorDetail(appDAO);
+
 		};
+	}
+
+	private void findInstructorDetail(AppDAO dao) {
+
+		InstructorDetail insD = dao.findInstructorDetailById(2);
+
+		System.out.println("insD: " + insD);
+		System.out.println("the associated instructor: " + insD.getInstructor());  // We have access to this bc of cascading
 	}
 
 	private void deleteInstructor(AppDAO dao) {
