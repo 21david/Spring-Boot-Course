@@ -33,7 +33,7 @@ public class JpamappingsdemoApplication {
 	}
 
 	private void deleteInstructorDetail(AppDAO dao) {
-		dao.deleteInstructorDetailById(2); // this deletes the instructor bc cascading is set
+		dao.deleteInstructorDetailById(3); // this deletes the instructor bc cascading is set
 	}
 
 	private void findInstructorDetail(AppDAO dao) {

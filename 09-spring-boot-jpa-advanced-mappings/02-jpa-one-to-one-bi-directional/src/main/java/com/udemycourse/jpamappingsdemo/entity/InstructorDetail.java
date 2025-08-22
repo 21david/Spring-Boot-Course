@@ -17,8 +17,8 @@ public class InstructorDetail {
     private String hobby;
 
     // This says to check the 'instructorDetail' property of Instructor for the key that refers to this entity
-    // CascadeType.ALL says that if this instructorDetail is deleted/read/etc, also do the same for the Instructor
-    @OneToOne(mappedBy="instructorDetail", cascade=CascadeType.ALL)
+    // in this case, deletions do not cascade to the instructor
+    @OneToOne(mappedBy="instructorDetail", cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Instructor instructor;
 
     public InstructorDetail() {
