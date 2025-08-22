@@ -17,16 +17,20 @@
         Role(s): <span sec:authentication="principal.authorities"></span>
     </p>
 
-    <hr>
+    <!--Inner content will only be shown if current user has Manager role. This won't even show up in the html page at all if not.-->
+    <div sec:authorize="hasRole('MANAGER')">
+        <p>
+            <a th:href="@{/leaders}">Leadership Meeting</a> (Only for managers)
+        </p>
+    </div>
 
-    <p>
-        <a th:href="@{/leaders}">Leadership Meeting</a> (Only for managers)
-    </p>
 
-
-    <p>
-        <a th:href="@{/systems}">IT SYSTEMS Meeting</a> (Only for admins)
-    </p>
+    <!--Inner content will only be shown if current user has Admin role. This won't even show up in the html page at all if not.-->
+    <div sec:authorize="hasRole('ADMIN')">
+        <p>
+            <a th:href="@{/systems}">IT SYSTEMS Meeting</a> (Only for admins)
+        </p>
+    </div>
 
     <hr>
     <form th:action="@{/logout}" method="POST">
