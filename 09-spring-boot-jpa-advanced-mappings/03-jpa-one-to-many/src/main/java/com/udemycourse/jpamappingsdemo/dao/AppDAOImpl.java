@@ -40,8 +40,12 @@ public class AppDAOImpl implements AppDAO {
 
         Instructor toDelete = findInstructorById(id);
 
-        // Because of CascadeType.ALL in Instructor, this also deletes any associated InstructorDetail in the database
-        entityManager.remove(toDelete);
+        // Add code to break association of all this instructor's courses
+        List<Course> courses = toDelete.getCourses();
+        for (Course course : courses)  // For each triggers a SELECT to initialize the lazy collection
+            course.setInstructor(null);  // Marks each Course dirty; on flush, Hibernate issues UPDATEs setting instructor_id = NULL
+
+        entityManager.remove(toDelete); // causes query to delete instructor detail also, because of CascadeType.ALL
     }
 
     @Override

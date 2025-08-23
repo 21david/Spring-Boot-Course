@@ -43,7 +43,9 @@ public class JpamappingsdemoApplication {
 
 //			updateInstructor(appDAO);
 
-			updateCourse(appDAO);
+//			updateCourse(appDAO);
+
+			deleteInstructor(appDAO);
 
 		};
 	}
