@@ -91,4 +91,10 @@ public class AppDAOImpl implements AppDAO {
         // this query will return the instructor object with the courses already set, even if courses is set to LAZY loading
         return query.getSingleResult();
     }
+
+    @Override
+    @Transactional
+    public void update(Instructor instructor) {
+        entityManager.merge(instructor);
+    }
 }

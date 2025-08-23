@@ -39,8 +39,26 @@ public class JpamappingsdemoApplication {
 
 //			findCoursesForInstructor(appDAO);
 
-			findInstructorWithCoursesJoinFetch(appDAO);
+//			findInstructorWithCoursesJoinFetch(appDAO);
+
+			updateInstructor(appDAO);
+
 		};
+	}
+
+	private void updateInstructor(AppDAO dao) {
+
+		int id = 1;
+
+		// get instructor object
+		Instructor ins = dao.findInstructorById(id);
+
+		// update
+		ins.setLastName("NewLast");
+
+		// update in db
+		dao.update(ins);
+
 	}
 
 	private void findInstructorWithCoursesJoinFetch(AppDAO dao) {
