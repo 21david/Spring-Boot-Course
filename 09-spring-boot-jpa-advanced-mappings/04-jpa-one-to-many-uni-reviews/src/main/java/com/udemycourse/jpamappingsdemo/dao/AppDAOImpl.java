@@ -120,4 +120,11 @@ public class AppDAOImpl implements AppDAO {
 
         entityManager.remove(course);
     }
+
+    @Override
+    @Transactional
+    public void save(Course course) {
+        // This will save the course and its associated reviews because of CascadeType.ALL
+        entityManager.persist(course);
+    }
 }

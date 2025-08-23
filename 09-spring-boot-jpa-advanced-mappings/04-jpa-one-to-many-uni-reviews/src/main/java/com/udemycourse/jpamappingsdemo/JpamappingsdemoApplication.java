@@ -4,6 +4,7 @@ import com.udemycourse.jpamappingsdemo.dao.AppDAO;
 import com.udemycourse.jpamappingsdemo.entity.Course;
 import com.udemycourse.jpamappingsdemo.entity.Instructor;
 import com.udemycourse.jpamappingsdemo.entity.InstructorDetail;
+import com.udemycourse.jpamappingsdemo.entity.Review;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,9 +25,24 @@ public class JpamappingsdemoApplication {
 
 		return runner -> {
 
-			
+			createCoursesAndReviews(appDAO);
 
 		};
+	}
+
+	private void createCoursesAndReviews(AppDAO dao) {
+
+		Course course = new Course("Pacman - How to score 1M points");
+
+		course.add(new Review("Awesome course!"));
+		course.add(new Review("Great course! well done!!"));
+		course.add(new Review("Dumb course dont take it"));
+
+		// save the course, and leverage the cascade all to also save the reviews in the db
+		dao.save(course);
+
+		System.out.println("Course: " + course + " | REVIEWS: " + course.getReviews());
+
 	}
 
 	private void deleteCourse(AppDAO dao) {
