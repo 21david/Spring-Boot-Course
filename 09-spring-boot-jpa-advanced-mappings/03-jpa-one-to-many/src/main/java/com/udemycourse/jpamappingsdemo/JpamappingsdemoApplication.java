@@ -31,8 +31,21 @@ public class JpamappingsdemoApplication {
 
 //			deleteInstructorDetail(appDAO);
 
-			createInstructorWithCourses(appDAO);
+//			createInstructorWithCourses(appDAO);
+
+			findInstructorWithCourses(appDAO);
 		};
+	}
+
+	private void findInstructorWithCourses(AppDAO dao) {
+
+		Instructor instructor = dao.findInstructorById(1);
+
+		System.out.println("Instructor: " + instructor);
+		// This throws LazyInitializationException if courses are not explicitly set to eager loading (bc OneToMany is lazy loading by default)
+		System.out.println("Instructor courses: " + instructor.getCourses());
+
+
 	}
 
 	private void createInstructorWithCourses(AppDAO dao) {

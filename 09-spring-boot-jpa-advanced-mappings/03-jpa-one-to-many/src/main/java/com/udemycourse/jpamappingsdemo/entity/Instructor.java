@@ -27,6 +27,7 @@ public class Instructor {
     private InstructorDetail instructorDetail;
 
     @OneToMany(mappedBy = "instructor",  // refers to 'instructor' property in Course
+                fetch = FetchType.EAGER,  // when getting an instructor, eagerly get its courses as well (careful - may slow down performance)
                 cascade={CascadeType.DETACH, CascadeType.PERSIST,
                          CascadeType.MERGE, CascadeType.REFRESH})
     private List<Course> courses;
