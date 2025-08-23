@@ -127,4 +127,22 @@ public class AppDAOImpl implements AppDAO {
         // This will save the course and its associated reviews because of CascadeType.ALL
         entityManager.persist(course);
     }
+
+    @Override
+    public Course findCourseAndReviewsByCourseId(int id) {
+
+        TypedQuery<Course> query = entityManager.createQuery("""
+             SELECT c from Course c
+             JOIN FETCH c.reviews
+             WHERE c.id = :id
+        """, Course.class);
+
+        query.setParameter("id", id);
+
+        // The returned course will automatically have its list of reviews correctly populated
+        Course result = query.getSingleResult();
+        System.out.println("findCourseAndReviewsByCourseId() got the course with id " + id + ": " + result);
+        System.out.println("findCourseAndReviewsByCourseId() got the course reviews with id " + id + ": " + result.getReviews());
+        return result;
+    }
 }

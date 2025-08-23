@@ -25,9 +25,19 @@ public class JpamappingsdemoApplication {
 
 		return runner -> {
 
-			createCoursesAndReviews(appDAO);
+//			createCoursesAndReviews(appDAO);
 
+			retrieveCourseAndReviews(appDAO);
 		};
+	}
+
+	private void retrieveCourseAndReviews(AppDAO dao) {
+		int id = 10;
+
+		Course course = dao.findCourseAndReviewsByCourseId(id);
+
+		System.out.println("Retrieved course: " + course);
+		System.out.println("Retrieved course reviews: " + course.getReviews());
 	}
 
 	private void createCoursesAndReviews(AppDAO dao) {
