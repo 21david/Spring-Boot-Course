@@ -75,6 +75,20 @@ public class AppDAOImpl implements AppDAO {
         return query.getResultList();
     }
 
+    @Override
+    public Instructor findInstructorByIdJoinFetch(int id) {
 
+        // This actually does a left join
+        TypedQuery<Instructor> query = entityManager.createQuery("""
+                SELECT i FROM Instructor i
+                JOIN FETCH i.courses
+                JOIN FETCH i.instructorDetail
+                WHERE i.id = :data
+        """, Instructor.class);
+
+        query.setParameter("data", id);
+
+        // this query will return the instructor object with the courses already set, even if courses is set to LAZY loading
+        return query.getSingleResult();
+    }
 }
-
