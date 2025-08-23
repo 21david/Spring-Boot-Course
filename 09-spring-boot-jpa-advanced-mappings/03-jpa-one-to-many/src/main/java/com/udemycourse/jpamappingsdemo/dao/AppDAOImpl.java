@@ -76,6 +76,11 @@ public class AppDAOImpl implements AppDAO {
     }
 
     @Override
+    public Course findCourseById(int id) {
+        return entityManager.find(Course.class, id);
+    }
+
+    @Override
     public Instructor findInstructorByIdJoinFetch(int id) {
 
         // This actually does a left join
@@ -96,5 +101,11 @@ public class AppDAOImpl implements AppDAO {
     @Transactional
     public void update(Instructor instructor) {
         entityManager.merge(instructor);
+    }
+
+    @Override
+    @Transactional
+    public void update(Course course) {
+        entityManager.merge(course);
     }
 }
