@@ -1,11 +1,15 @@
 package com.udemycourse.jpamappingsdemo.dao;
 
+import com.udemycourse.jpamappingsdemo.entity.Course;
 import com.udemycourse.jpamappingsdemo.entity.Instructor;
 import com.udemycourse.jpamappingsdemo.entity.InstructorDetail;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class AppDAOImpl implements AppDAO {
@@ -57,6 +61,18 @@ public class AppDAOImpl implements AppDAO {
 
         // Through cascading, this also deletes the instructor
         entityManager.remove(det);
+    }
+
+    @Override
+    public List<Course> findCoursesByInstructorId(int id) {
+
+        TypedQuery<Course> query = entityManager.createQuery(
+                "from Course where instructor.id = :data", Course.class
+        );
+
+        query.setParameter("data", id);
+
+        return query.getResultList();
     }
 
 

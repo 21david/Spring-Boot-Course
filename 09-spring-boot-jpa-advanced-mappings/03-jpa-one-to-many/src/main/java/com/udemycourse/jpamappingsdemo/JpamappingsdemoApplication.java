@@ -9,6 +9,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class JpamappingsdemoApplication {
 
@@ -33,8 +35,25 @@ public class JpamappingsdemoApplication {
 
 //			createInstructorWithCourses(appDAO);
 
-			findInstructorWithCourses(appDAO);
+//			findInstructorWithCourses(appDAO);
+
+			findCoursesForInstructor(appDAO);
 		};
+	}
+
+	private void findCoursesForInstructor(AppDAO dao) {
+		Instructor instructor = dao.findInstructorById(1);
+
+		System.out.println("Instructor: " + instructor);
+
+		// courses are lazy loaded, so we must manually get them
+		List<Course> courses = dao.findCoursesByInstructorId(1);
+
+		instructor.setCourses(courses);
+
+		// This throws LazyInitializationException if courses are not explicitly set to eager loading (bc OneToMany is lazy loading by default) ?
+		System.out.println("Instructor Courses: " + instructor.getCourses());
+
 	}
 
 	private void findInstructorWithCourses(AppDAO dao) {
