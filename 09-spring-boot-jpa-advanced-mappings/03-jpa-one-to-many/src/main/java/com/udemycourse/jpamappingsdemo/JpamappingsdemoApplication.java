@@ -1,6 +1,7 @@
 package com.udemycourse.jpamappingsdemo;
 
 import com.udemycourse.jpamappingsdemo.dao.AppDAO;
+import com.udemycourse.jpamappingsdemo.entity.Course;
 import com.udemycourse.jpamappingsdemo.entity.Instructor;
 import com.udemycourse.jpamappingsdemo.entity.InstructorDetail;
 import org.springframework.boot.CommandLineRunner;
@@ -28,8 +29,33 @@ public class JpamappingsdemoApplication {
 
 //			findInstructorDetail(appDAO);
 
-			deleteInstructorDetail(appDAO);
+//			deleteInstructorDetail(appDAO);
+
+			createInstructorWithCourses(appDAO);
 		};
+	}
+
+	private void createInstructorWithCourses(AppDAO dao) {
+
+		Instructor ins = new Instructor("Sal", "Khan", "sal@gmail.com");
+
+		InstructorDetail insDt = new InstructorDetail("youtube.com/sal", "coding");
+
+		ins.setInstructorDetail(insDt);
+
+		Course c1 = new Course("Calculus I");
+		Course c2 = new Course("Calculus II");
+		Course c3 = new Course("Chemistry");
+
+		ins.add(c1);
+		ins.add(c2);
+		ins.add(c3);
+
+		System.out.println("Saving instructor " + ins);
+		System.out.println("His courses" + ins.getCourses());
+
+		// This will also save the courses to the db because of CascadeType.PERSIST
+		dao.save(ins);
 	}
 
 	private void deleteInstructorDetail(AppDAO dao) {
