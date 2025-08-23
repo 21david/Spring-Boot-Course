@@ -45,9 +45,15 @@ public class JpamappingsdemoApplication {
 
 //			updateCourse(appDAO);
 
-			deleteInstructor(appDAO);
+//			deleteInstructor(appDAO);
 
+			deleteCourse(appDAO);
 		};
+	}
+
+	private void deleteCourse(AppDAO dao) {
+		int id = 11;
+		dao.deleteCourseById(id);
 	}
 
 	private void updateCourse(AppDAO dao) {
