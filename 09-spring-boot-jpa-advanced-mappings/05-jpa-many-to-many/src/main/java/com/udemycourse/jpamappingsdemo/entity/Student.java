@@ -2,6 +2,9 @@ package com.udemycourse.jpamappingsdemo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name="student")
 public class Student {
@@ -17,6 +20,13 @@ public class Student {
 
     @Column(name="email")
     private String email;
+
+    // MANY TO MANY
+    // This is the non-owning side
+    @ManyToMany(fetch = FetchType.LAZY,
+                cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},
+                mappedBy = "students") // this refers to the 'List<Student> students' property in Course
+    private List<Course> courses;
 
     public Student() {
     }
@@ -57,6 +67,23 @@ public class Student {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
+
+    // convenience method
+    public void addCourse(Course course) {
+        if (courses == null)
+            courses = new ArrayList<>();
+
+        courses.add(course);
+        course.addStudent(this);
     }
 
     @Override

@@ -1,10 +1,7 @@
 package com.udemycourse.jpamappingsdemo;
 
 import com.udemycourse.jpamappingsdemo.dao.AppDAO;
-import com.udemycourse.jpamappingsdemo.entity.Course;
-import com.udemycourse.jpamappingsdemo.entity.Instructor;
-import com.udemycourse.jpamappingsdemo.entity.InstructorDetail;
-import com.udemycourse.jpamappingsdemo.entity.Review;
+import com.udemycourse.jpamappingsdemo.entity.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,11 +18,30 @@ public class JpamappingsdemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(AppDAO appDAO) {  // appDAO injected automatically because this is a bean
+	public CommandLineRunner commandLineRunner(AppDAO dao) {  // appDAO injected automatically because this is a bean
 
 		return runner -> {
 
+			createCourseAndStudents(dao);
+
 		};
+	}
+
+	private void createCourseAndStudents(AppDAO dao) {
+		Course course = new Course("Chemistry");
+
+		Student s1 = new Student("Joe", "Billy", "joe@gmail.com");
+		Student s2 = new Student("Marta", "Shane", "marta@gmail.com");
+
+		course.addStudent(s1);
+		course.addStudent(s2);
+
+		System.out.println("Saving course: " + course);
+		System.out.println("Students: " + course.getStudents());
+
+		// because of CascadeType.PERSIST in Course @ManyToMany annotation on its students,
+		// this will also save the two students, as well as the join table rows that join them
+		dao.save(course);
 	}
 
 	private void deleteCourseAndReviews(AppDAO dao) {

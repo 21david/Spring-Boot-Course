@@ -26,6 +26,17 @@ public class Course {
     @JoinColumn(name="course_id")  // the 'course_id' column in reviews is the one that points to this course
     private List<Review> reviews;
 
+    // MANY TO MANY
+    // Course is the owning side in thie case
+    @ManyToMany(fetch=FetchType.LAZY,
+                cascade={CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(
+            name="course_student",  // the "bridge" table (join table) that has pairs of (course_id, student_id), which are basically edges in a bipartite graph
+            joinColumns = @JoinColumn(name = "course_id"),  // column in the join table that points to this course
+            inverseJoinColumns = @JoinColumn(name = "student_id")  // column in the join table that points to the student that takes this course
+    )
+    private List<Student> students;
+
     public Course() {
     }
 
@@ -70,6 +81,22 @@ public class Course {
             reviews = new ArrayList<>();
 
         reviews.add(review);
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    // convenience method for students
+    public void addStudent(Student student) {
+        if (students == null)
+            students = new ArrayList<>();
+
+        students.add(student);
     }
 
     @Override
