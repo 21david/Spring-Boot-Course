@@ -25,12 +25,6 @@ public class JpamappingsdemoApplication {
 
 		return runner -> {
 
-//			createCoursesAndReviews(appDAO);
-
-//			retrieveCourseAndReviews(appDAO);
-
-			deleteCourseAndReviews(appDAO);
-
 		};
 	}
 
