@@ -33,8 +33,15 @@ public class JpamappingsdemoApplication {
 			// This will delete the course with id 11 as well as entries in course_student with course_id 11
 			// but it does not delete the students. It basically deletes the course and deletes associations
 			// to it in the join table.
-			deleteCourse(dao);
+//			deleteCourse(dao);
+
+			deleteStudent(dao);
 		};
+	}
+
+	private void deleteStudent(AppDAO dao) {
+		int id = 10;
+		dao.deleteStudentById(id);
 	}
 
 	private void addMoreCoursesForStudent(AppDAO dao) {
