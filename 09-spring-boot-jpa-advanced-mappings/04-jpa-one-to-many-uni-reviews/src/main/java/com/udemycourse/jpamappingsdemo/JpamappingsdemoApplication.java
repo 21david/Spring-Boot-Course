@@ -27,8 +27,18 @@ public class JpamappingsdemoApplication {
 
 //			createCoursesAndReviews(appDAO);
 
-			retrieveCourseAndReviews(appDAO);
+//			retrieveCourseAndReviews(appDAO);
+
+			deleteCourseAndReviews(appDAO);
+
 		};
+	}
+
+	private void deleteCourseAndReviews(AppDAO dao) {
+		int id = 10;
+
+		// This should also delete all associated reviews because CascadeType.ALL is set on Course's "reviews" List property
+		dao.deleteCourseById(id);
 	}
 
 	private void retrieveCourseAndReviews(AppDAO dao) {

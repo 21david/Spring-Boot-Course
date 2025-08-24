@@ -22,7 +22,7 @@ public class Course {
     private Instructor instructor;
 
     @OneToMany(fetch = FetchType.LAZY,
-                cascade = CascadeType.ALL)
+                cascade = CascadeType.ALL)  //CascadeType.ALL means anything done to this course will also happen to the reviews
     @JoinColumn(name="course_id")  // the 'course_id' column in reviews is the one that points to this course
     private List<Review> reviews;
 
