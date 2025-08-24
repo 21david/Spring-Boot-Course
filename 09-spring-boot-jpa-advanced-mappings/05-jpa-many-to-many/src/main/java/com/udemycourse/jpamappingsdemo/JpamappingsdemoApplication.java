@@ -26,9 +26,27 @@ public class JpamappingsdemoApplication {
 
 //			findCourseAndStudents(dao);
 
-			findStudentAndCourses(dao);
+//			findStudentAndCourses(dao);
+
+			addMoreCoursesForStudent(dao);
 
 		};
+	}
+
+	private void addMoreCoursesForStudent(AppDAO dao) {
+		int id = 11;
+		Student student = dao.findStudentAndCoursesByStudentId(id);
+
+		// Create courses
+		Course c1 = new Course("Art I");
+		Course c2 = new Course("Robotics");
+
+		// "Enroll" this student in these courses
+		student.addCourse(c1);
+		student.addCourse(c2);
+
+		// This will update the student table, course_student table, and the course table with all the new info
+		dao.update(student);
 	}
 
 	private void findStudentAndCourses(AppDAO dao) {
