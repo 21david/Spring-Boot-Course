@@ -22,9 +22,31 @@ public class JpamappingsdemoApplication {
 
 		return runner -> {
 
-			createCourseAndStudents(dao);
+//			createCourseAndStudents(dao);
+
+//			findCourseAndStudents(dao);
+
+			findStudentAndCourses(dao);
 
 		};
+	}
+
+	private void findStudentAndCourses(AppDAO dao) {
+		int id = 10;
+
+		Student student = dao.findStudentAndCoursesByStudentId(id);
+
+		System.out.println("Student retrieved: " + student);
+		System.out.println("Its courses: " + student.getCourses());
+	}
+
+	private void findCourseAndStudents(AppDAO dao) {
+		int id = 10;
+
+		Course course = dao.findCourseAndStudentsByCourseId(id);
+
+		System.out.println("Course retrieved: " + course);
+		System.out.println("Its students: " + course.getStudents());
 	}
 
 	private void createCourseAndStudents(AppDAO dao) {

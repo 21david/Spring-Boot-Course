@@ -3,6 +3,7 @@ package com.udemycourse.jpamappingsdemo.dao;
 import com.udemycourse.jpamappingsdemo.entity.Course;
 import com.udemycourse.jpamappingsdemo.entity.Instructor;
 import com.udemycourse.jpamappingsdemo.entity.InstructorDetail;
+import com.udemycourse.jpamappingsdemo.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -144,5 +145,31 @@ public class AppDAOImpl implements AppDAO {
         System.out.println("findCourseAndReviewsByCourseId() got the course with id " + id + ": " + result);
         System.out.println("findCourseAndReviewsByCourseId() got the course reviews with id " + id + ": " + result.getReviews());
         return result;
+    }
+
+    @Override
+    public Course findCourseAndStudentsByCourseId(int id) {
+        TypedQuery<Course> query = entityManager.createQuery("""
+            SELECT c from Course c
+            JOIN FETCH c.students
+            WHERE c.id = :id
+        """, Course.class);
+
+        query.setParameter("id", id);
+
+        return query.getSingleResult();
+    }
+
+    @Override
+    public Student findStudentAndCoursesByStudentId(int id) {
+        TypedQuery<Student> query = entityManager.createQuery("""
+            SELECT s from Student s
+            JOIN FETCH s.courses
+            WHERE s.id = :id
+        """, Student.class);
+
+        query.setParameter("id", id);
+
+        return query.getSingleResult();
     }
 }

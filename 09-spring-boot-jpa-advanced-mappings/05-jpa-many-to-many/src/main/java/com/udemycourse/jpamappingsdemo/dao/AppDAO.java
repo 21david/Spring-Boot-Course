@@ -3,6 +3,7 @@ package com.udemycourse.jpamappingsdemo.dao;
 import com.udemycourse.jpamappingsdemo.entity.Course;
 import com.udemycourse.jpamappingsdemo.entity.Instructor;
 import com.udemycourse.jpamappingsdemo.entity.InstructorDetail;
+import com.udemycourse.jpamappingsdemo.entity.Student;
 
 import java.util.List;
 
@@ -33,5 +34,7 @@ public interface AppDAO {
 
     Course findCourseAndReviewsByCourseId(int id);
 
+    Course findCourseAndStudentsByCourseId(int id);
 
+    Student findStudentAndCoursesByStudentId(int id);
 }
