@@ -25,10 +25,19 @@ public class AopdemoApplication {
 	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		// Since we used the pointcut "execution(* com.udemycourse.aopdemo.dao.*.*(..))", each of these will cause
 		// both the beforeAddAccountAdvice() AND the performApiAnalytics() methods to hit
+
+		// account dao methods
 		Account acc = new Account();
 		accountDAO.addAccount(acc, true);
 		accountDAO.doWork();
 
+		// test getters and setters
+		accountDAO.setName("GoodName");
+		accountDAO.setServiceCode("premium");
+		accountDAO.getName();
+		accountDAO.getServiceCode();
+
+		// membership dao methods
 		membershipDAO.addAccount();
 		membershipDAO.addDummy();
 		membershipDAO.goToSleep();
