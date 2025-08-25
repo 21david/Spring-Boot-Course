@@ -25,7 +25,6 @@ public class MyDemoLoggingAspect {
     private void forDaoPackageNoGetterSetter() {}
 
 
-
     // This uses the pointcut declaration declared above that excludes getters and setters
     @Before("forDaoPackageNoGetterSetter()")
     public void beforeAddAccountAdvice() {
@@ -38,4 +37,9 @@ public class MyDemoLoggingAspect {
         System.out.println("======>>> Performing API analytics");
     }
 
+    // This uses the pointcut declaration declared above that excludes getters and setters
+    @Before("forDaoPackageNoGetterSetter()")  // <--- we are reusing the pointcut declaration, DRY code
+    public void logToCloudAsync() {
+        System.out.println("======>>> Logging to cloud in async fashion");
+    }
 }
