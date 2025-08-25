@@ -2,16 +2,18 @@ package com.udemycourse.aopdemo.aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class MyDemoLoggingAspect {
 
-    // This says "Call this before any execution of a method that has the signature 'public void addAccount()'"
-    // This is an 'advice'
-    // "execution" is a "pointcut expression"
-    @Before("execution(public void addAccount())")
+    @Pointcut("execution(* com.udemycourse.aopdemo.dao.*.*(..))")
+    private void forDaoPackage() {}  // this can have any name, basically just used as a variable name or label
+
+    // This uses the pointcut declaration declared above
+    @Before("forDaoPackage()")
     public void beforeAddAccountAdvice() {
         System.out.println("\n ======>>> Executing @Before advice on addAccount()");
     }

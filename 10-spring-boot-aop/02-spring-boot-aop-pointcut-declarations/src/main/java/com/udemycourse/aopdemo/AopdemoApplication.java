@@ -23,8 +23,13 @@ public class AopdemoApplication {
 	}
 
 	private void demoTheBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
-		// Since we used the pointcut "execution(public void addAccount())", both of these will cause the advice method to hit
-		accountDAO.addAccount();
+		// Since we used the pointcut "execution(* com.udemycourse.aopdemo.dao.*.*(..))", all of these will cause the beforeAddAccountAdvice() method to hit
+		Account acc = new Account();
+		accountDAO.addAccount(acc, true);
+		accountDAO.doWork();
+
 		membershipDAO.addAccount();
+		membershipDAO.addDummy();
+		membershipDAO.goToSleep();
 	}
 }

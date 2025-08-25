@@ -8,4 +8,16 @@ public class MembershipDAOImpl implements MembershipDAO {
     public void addAccount() {
         System.out.println(getClass() + ": Doing my DB work: adding a membership account.");
     }
+
+    @Override
+    public boolean addDummy() {
+        System.out.println(getClass() + ": addDummy()");
+        return false;
+    }
+
+    @Override
+    public void goToSleep() {
+        System.out.println(getClass() + ": goToSleep()");
+
+    }
 }
